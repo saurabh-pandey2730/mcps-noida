@@ -11,31 +11,51 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import CreateUser from './pages/Users/CreateUser';
 import UpdateUser from './pages/Users/UpdateUser';
-import DashBoard from './pages/Dashboard/DashBoard';
+
 import Main from './pages/Faculty/Main';
 import DashboardAdmin from './components/Admin/DashboardAdmin';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 function App() {
-  return (
-    <div>
-      
-   <Nav1/>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='*' element={<h1>Invalid path</h1>} />
-        <Route path='/courses' element={<Courses />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/blog' element={<Blog />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/register' element={<Register/>} />
-        <Route path='/create' element={<CreateUser/>} />
-        <Route path='/update' element={<UpdateUser/>} />
-        <Route path='/admin' element={<DashBoard/>} />
-        <Route path='/faculty' element={<Main/>} />
-        <Route path='/d' element={<DashboardAdmin/>} />
-      </Routes>
+  const [students, SetStudents]=useState([])
+ const [isAdmin, setIsAdmin]=useState("a")
+useEffect(()=>{
+  //  axios.get('http://127.0.0.1:8000/students/')
+  //  .then((data)=>{
+// SetStudents(data)
+// SetStudents(data.data)
+// },[])
+})
 
-      <Footer/>
+
+console.log(students)
+return (
+  <div>
+      
+      {isAdmin? <DashboardAdmin/> :  <div>
+
+<Nav1/>
+<Routes>
+ <Route path='/' element={<Home />} />
+ <Route path='/courses' element={<Courses />} />
+ <Route path='/about' element={<About />} />
+ <Route path='/blog' element={<Blog />} />
+ <Route path='/contact' element={<Contact />} />
+ <Route path='/login' element={<Login/>} />
+ <Route path='/register' element={<Register/>} />
+ <Route path='/create' element={<CreateUser/>} />
+ <Route path='/update' element={<UpdateUser/>} />
+ {/* <Route path='/admin' element={<DashBoard/>} /> */}
+ <Route path='/faculty' element={<Main/>} />
+ {/* <Route path='/admin' element={<DashboardAdmin/>} /> */}
+</Routes>
+
+
+
+
+<Footer/>
+</div>}
+      
     </div>
   );
 }
